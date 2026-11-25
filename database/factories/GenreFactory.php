@@ -17,8 +17,25 @@ class GenreFactory extends Factory
      */
     public function definition(): array
     {
+        $genres = [
+            'Фантастика',
+            'Фэнтези',
+            'Детектив',
+            'Триллер',
+            'Роман',
+            'Классика',
+            'Приключения',
+            'Исторический роман',
+            'Научпоп',
+            'Психология',
+            'Биография',
+            'Поэзия',
+            'Ужасы',
+            'Бизнес-литература',
+        ];
+
         return [
-            'name' => fake('ru_RU')->unique()->word(),
+            'name' => fake('ru_RU')->unique()->randomElement($genres),
         ];
     }
 }

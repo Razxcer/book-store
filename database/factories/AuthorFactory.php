@@ -17,10 +17,12 @@ class AuthorFactory extends Factory
      */
     public function definition(): array
     {
+        $gender = fake()->randomElement(['male', 'female']);
+
         return [
-            'first_name' => fake('ru_RU')->firstName(),
-            'second_name' => fake('ru_RU')->lastName(),
-            'third_name' => fake('ru_RU')->optional()->word(),
+            'first_name' => fake('ru_RU')->firstName($gender),
+            'second_name' => fake('ru_RU')->lastName($gender),
+            'third_name' => fake('ru_RU')->optional()->middlename($gender),
             'birth_date' => fake('ru_RU')->date('Y-m-d'),
             'bio' => fake('ru_RU')->paragraph(5),
         ];
