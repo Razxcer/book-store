@@ -18,6 +18,6 @@ class Genre extends Model
     }
 
     protected $fillable = [
-        'title',
+        'name',
     ];
 }
