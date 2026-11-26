@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Database\Factories\AuthorFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Fillable(['first_name', 'second_name', 'third_name', 'birth_date', 'bio'])]
 class Author extends Model
 {
     /** @use HasFactory<AuthorFactory> */
@@ -17,14 +19,6 @@ class Author extends Model
     {
         return $this->hasMany(Book::class);
     }
-
-    protected $fillable = [
-        'first_name',
-        'second_name',
-        'third_name',
-        'birth_date',
-        'bio',
-    ];
 
     protected function casts(): array
     {

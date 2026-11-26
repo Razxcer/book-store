@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Database\Factories\BookFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Fillable(['title', 'description', 'year', 'price', 'discount'])]
 class Book extends Model
 {
     /** @use HasFactory<BookFactory> */
@@ -23,14 +25,6 @@ class Book extends Model
     {
         return $this->belongsToMany(Genre::class);
     }
-
-    protected $fillable = [
-        'title',
-        'description',
-        'year',
-        'price',
-        'discount',
-    ];
 
     protected function casts(): array
     {
