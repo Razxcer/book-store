@@ -23,6 +23,11 @@ class VerifyCodeRequest extends SendCodeRequest
     {
         return [
             ...parent::rules(),
+            /**
+             * 4-значный одноразовый код подтверждения из SMS или письма.
+             *
+             * @example 2207
+             */
             'code' => ['required', 'string', 'size:4'],
         ];
     }

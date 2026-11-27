@@ -17,6 +17,13 @@ class AuthController extends Controller
     ) {
     }
 
+    /**
+     * Отправка кода подтверждения
+     *
+     * <b> Генерирует 4-значный код и записывает его в логи </b> (пока что)
+     *
+     * @unauthenticated
+     */
     public function sendCode(SendCodeRequest $request): JsonResponse
     {
         $this->authService->sendCode((string) $request->validated('contact'));
@@ -26,6 +33,13 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Проверка кода и авториация
+     *
+     * <b> Проверяет полученный код </b> <br/>
+     * Если код не верный - выдаёт ошибку <i>422</i> <br/>
+     * Если код верный - авторизует пользователя и отдаёт Bearer токен
+     */
     public function verifyCode(VerifyCodeRequest $request): AuthTokenResource
     {
         $validated = $request->validated();
@@ -35,6 +49,11 @@ class AuthController extends Controller
         return new AuthTokenResource($result);
     }
 
+    /**
+     * Выход из системы
+     *
+     * <b> Удаляет текущий токен </b>
+     */
     public function logout(Request $request): JsonResponse
     {
         $user = $request->user();
