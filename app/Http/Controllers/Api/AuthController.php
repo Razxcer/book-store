@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Auth\SendCodeRequest;
-use App\Http\Requests\Api\V1\Auth\VerifyCodeRequest;
-use App\Http\Resources\Api\V1\AuthTokenResource;
+use App\Http\Requests\Api\Auth\SendCodeRequest;
+use App\Http\Requests\Api\Auth\VerifyCodeRequest;
+use App\Http\Resources\Api\AuthTokenResource;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,6 +39,8 @@ class AuthController extends Controller
      * <b> Проверяет полученный код </b> <br/>
      * Если код не верный - выдаёт ошибку <i>422</i> <br/>
      * Если код верный - авторизует пользователя и отдаёт Bearer токен
+     *
+     * @unauthenticated
      */
     public function verifyCode(VerifyCodeRequest $request): AuthTokenResource
     {
