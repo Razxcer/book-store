@@ -17,12 +17,7 @@ class AuthTokenResource extends JsonResource
         return [
             'access_token' => $this->resource['token'],
             'token_tipe' => 'Bearer',
-            'user' => [
-                'id' => $this->resource['user']->id,
-                'email' => $this->resource['user']->email,
-                'phone' => $this->resource['user']->phone,
-                'first_name' => $this->resource['user']->first_name,
-            ],
+            'user' => new UserResource($this->resource['user']),
         ];
 
     }
