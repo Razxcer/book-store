@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Auth;
+namespace App\Http\Requests\Api\Auth;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 
@@ -23,6 +23,11 @@ class VerifyCodeRequest extends SendCodeRequest
     {
         return [
             ...parent::rules(),
+            /**
+             * 4-значный одноразовый код подтверждения из SMS или письма.
+             *
+             * @example 2207
+             */
             'code' => ['required', 'string', 'size:4'],
         ];
     }

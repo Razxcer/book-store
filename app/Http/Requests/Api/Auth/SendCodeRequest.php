@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Auth;
+namespace App\Http\Requests\Api\Auth;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,6 +24,13 @@ class SendCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
+            /**
+             * Email или номер телефона пользователя в международном формате. <br/>
+             *
+             * Пример: <i> +79992226767, test@gmail.com </i>
+             *
+             * @example test@gmail.com
+             */
             'contact' => [
                 'required',
                 'string',
