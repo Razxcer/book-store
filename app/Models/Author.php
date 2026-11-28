@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property string|null $full_name
+ */
 #[Fillable(['first_name', 'second_name', 'third_name', 'birth_date', 'bio'])]
 class Author extends Model
 {
