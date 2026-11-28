@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\GenreResource;
+use App\Repositories\GenreRepository;
 use App\Services\GenreService;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
     public function __construct(
-        protected readonly GenreService $genreService
+        protected readonly GenreService $genreService,
+        protected readonly GenreRepository $genreRepository,
+
     ) {
     }
 
@@ -23,7 +26,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genres = $this->genreService->getAllWithBooksCount();
+        $genres = $this->genreRepository->getAllWithBooksCount();
 
         return GenreResource::collection($genres);
     }
