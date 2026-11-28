@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\AuthorResource;
 use App\Models\Author;
+use App\Repositories\AuthorRepository;
 use App\Services\AuthorService;
 use Dedoc\Scramble\Attributes\PathParameter;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ use Illuminate\Http\Request;
 class AuthorController extends Controller
 {
     public function __construct(
-        private readonly AuthorService $authorService
+        private readonly AuthorService $authorService,
+        private readonly AuthorRepository $authorRepository
     ) {
     }
 
@@ -26,7 +28,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = $this->authorService->getAllWithBooksAndLastBook(15);
+        $authors = $this->authorRepository->getPaginated(15);
 
         return AuthorResource::collection($authors);
     }
@@ -57,7 +59,7 @@ class AuthorController extends Controller
     #[PathParameter('author', example: 1)]
     public function show(Author $author)
     {
-        $author = $this->authorService->showWithBooks($author);
+        $author = $this->authorRepository->loadDetails($author);
 
         return AuthorResource::make($author);
     }
