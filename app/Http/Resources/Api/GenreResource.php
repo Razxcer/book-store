@@ -21,6 +21,7 @@ class GenreResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'books_count' => $this->whenCounted('books'),
         ];
     }
 }
