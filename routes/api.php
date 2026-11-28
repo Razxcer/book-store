@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\ProfileController;
 use Illuminate\Http\Request;
@@ -24,5 +25,7 @@ Route::prefix('v1')->name('v1.')->group(function (): void {
     });
 
     Route::get('/genres', [GenreController::class, 'index']);
+    Route::get('/authors', [AuthorController::class, 'index']);
+    Route::get('/authors/{author}', [AuthorController::class, 'show']);
 
 });
