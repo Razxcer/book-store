@@ -25,9 +25,9 @@ class BookResource extends JsonResource
             'year' => $this->year,
             'price' => $this->price,
             'discount' => $this->discount,
-
-            'author' => new AuthorResource($this->whenLoaded('author')),
+            'author' => AuthorResource::make($this->whenLoaded('author')),
             'genres' => GenreResource::collection($this->whenLoaded('genres')),
+            'created_at' => $this->created_at?->toIso8601String(),
         ];
     }
 }
