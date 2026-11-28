@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\BookResource;
 use App\Models\Book;
+use App\Repositories\BookRepository;
 use App\Services\BookService;
 use Dedoc\Scramble\Attributes\PathParameter;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     public function __construct(
-        private readonly BookService $bookService
+        private readonly BookService $bookService,
+        private readonly BookRepository $bookRepository
     ) {
     }
 
@@ -25,7 +27,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = $this->bookService->getPaginated(15);
+        $books = $this->bookRepository->getPaginated(15);
 
         return BookResource::collection($books);
     }
@@ -56,7 +58,7 @@ class BookController extends Controller
     #[PathParameter('book', example: 1)]
     public function show(Book $book)
     {
-        $book = $this->bookService->showWithAuthorAndGenres($book);
+        $book = $this->bookRepository->loadDetails($book);
 
         return BookResource::make($book);
     }
